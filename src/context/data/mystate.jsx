@@ -1,40 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import mycontext from './mycontext'
-import toast from 'react-hot-toast'
 
-function Mystate(props) {
+function MyState(props) {
 
+  //* Loading state
+  const [loading, setLoading] = useState(false);
 
-   const [loading, setloading] = useState(false)
-
-   const [allnotes, setallnotes] = useState([])
-
-   const getallnotes = async () => {
-    setloading(true)
-
-    try {
-      const res = await fetch(`http://localhost:4000/api/notes/fetchallnotes`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': localStorage.getItem('token')
+  //* get Notes
+  const [allNotes, setAllNotes] = useState([]);
+  
+  //* Get All Notes Functions
+    const getAllNotes = async () => {
+      setLoading(true)
+      try {
+        const res = await fetch(`http://localhost:4000/api/notes/fetchallnotes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': localStorage.getItem('token')
+        }
+      });
+        const notesData = await res.json();
+        console.log(notesData)
+        setAllNotes(notesData);
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+        setLoading(false)
       }
-    });
-      
-    const notesdata =await res.json();
-    console.log(notesdata);
-    setallnotes(false)
-    setloading(false)
-
-
-    } catch (error) {
-      console.log(error);
-      setloading(false)
     }
-   }
 
 
-   const [title, setTitle] = useState('');
+
+    //* Add Note state
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [tag, setTag] = useState('');
 
@@ -49,9 +48,10 @@ function Mystate(props) {
         body: JSON.stringify({ title, description, tag })
       });
   
+      //* response
       const noteData = await res.json();
-      
-    getallnotes()
+      // console.log(noteData)
+      getAllNotes();
   
       //* condition 
       if (noteData.error) {
@@ -67,18 +67,14 @@ function Mystate(props) {
       setDescription("");
       setTag("");
   
+
+      return (
+        <mycontext.Provider value={{ title, setTitle, description, 
+          setDescription, tag, setTag,
+          addNote,allNotes, getAllNotes,loading }} >
+          {props.children}
+        </mycontext.Provider>
+      )
     }
-  
-
-  return (
-    <mycontext.Provider value={{allnotes , getallnotes ,loading ,
-    title, setTitle, description, 
-      setDescription, tag, setTag,
-      addNote
-    }}>
-    {props.children}
-
-    </mycontext.Provider>
-  )
-}
-export default Mystate
+  }
+    export default MyState
