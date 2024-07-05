@@ -1,6 +1,10 @@
 import React, { useContext } from 'react'
 import Layout from '../../components/layout/Layout'
 import mycontext from '../../context/data/mycontext';
+
+
+
+
 function AddNote() {
     const context = useContext(mycontext);
     const { title, setTitle, description, setDescription, tag, setTag, addNote } = context;

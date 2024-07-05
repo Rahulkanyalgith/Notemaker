@@ -17,5 +17,6 @@ app.use('/api/auth' ,auth)
 app.use('/api/notes' ,notes)
     
 app.listen(port, () => {
+    console.log("asdfasd");
     console.log(`Example app listening at http://localhost:${port}`)
 })
