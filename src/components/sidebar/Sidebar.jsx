@@ -5,7 +5,7 @@ function SideBar() {
     const navigate = useNavigate();
 
     const logout = () => {
-        localStorage.clear('token')
+        localStorage.clear('token');
         navigate('/login')
     }
 
@@ -14,7 +14,7 @@ function SideBar() {
 
             {/* Top Image  */}
             <div className="flex justify-center">
-                <img className=' w-52 mt-10' src="img/logo.png" alt="" />
+                <img className=' w-52 mt-10' src="https://frontende-n.vercel.app/img/logo.png" alt="" />
             </div>
 
             {/* Ul  */}

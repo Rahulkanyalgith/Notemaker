@@ -1,6 +1,5 @@
-
-import SideBar from '../sidebar/Sidebar'
-import TopNavbar from '../topnavbar/TopNavbar'
+import Sidebar from '../sidebar/Sidebar'
+import TopNavbar from '../topNavbar/TopNavbar'
 
 function Layout({ children }) {
     return (
@@ -15,11 +14,11 @@ function Layout({ children }) {
 
                 {/* Sidebar hidden on mobile  */}
                 <nav class=" w-72 flex-none ... hidden md:block">
-                     <SideBar/>
+                    <Sidebar />
                 </nav>
 
                 {/* main content  */}
-                <main class="flex-1 min-w-0 overflow-auto">
+                <main class="flex-1 min-w-0 overflow-auto ...">
                     <div className=" flex  justify-center">
                         {children}
                     </div>
