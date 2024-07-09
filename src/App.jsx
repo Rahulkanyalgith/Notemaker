@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Mystate from "./context/data/mystate";
+import Mystate from "./context/data/myState";
 import Home from "./pages/home/Home";
 import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
