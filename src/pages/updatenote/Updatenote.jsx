@@ -1,7 +1,77 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
+import { useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function UpdateNote() {
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [tag, setTag] = useState('');
+
+    //* Get Id From useParams
+    const { id } = useParams();
+
+    //* navigate
+    const navigate = useNavigate();
+
+    //* Get Note By Id
+    const getNotesById = async () => {
+        const res = await fetch(`http://localhost:4000/api/notes/notes/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token')
+            }
+        });
+        const data = await res.json();
+
+        //* Set data
+        setTitle(data?.title)
+        setTag(data?.tag)
+        setDescription(data?.description)
+    }
+
+    //* Get data automatically
+    useEffect(() => {
+        getNotesById();
+    }, [id]);
+
+
+    //* Update Note Function
+    const updateNote = async () => {
+        try {
+            const res = await
+                fetch(`http://localhost:4000/api/notes/updatenote/${id}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            "auth-token": localStorage.getItem('token')
+
+                        }, body: JSON.stringify({ title, tag, description })
+                    });
+
+            //* response        
+            const noteData = await res.json()
+
+            //* condition
+            if (noteData.error) {
+                toast.error(noteData.error)
+            } else {
+                toast.success(noteData.success)
+                navigate('/')
+            }
+            
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+
+
+
     return (
         <Layout>
             <div className=' lg:mx-[6em] mt-16 lg:mt-0 flex justify-center items-center h-screen'>
@@ -19,6 +89,8 @@ function UpdateNote() {
                         <div>
                             <input type="text"
                                 name='title'
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                                 className='inputShadow
                                  mb-4 px-2 py-2 w-full rounded-lg text-black placeholder:text-black outline-none'
                                 placeholder='Title'
@@ -29,6 +101,8 @@ function UpdateNote() {
                         <div>
                             <input type="text"
                                 name='tag'
+                                value={tag}
+                                onChange={(e) => setTag(e.target.value)}
                                 className='inputShadow
                                   mb-4 px-2 py-2 w-full rounded-lg text-black placeholder:text-black outline-none'
                                 placeholder='Tag'
@@ -38,6 +112,8 @@ function UpdateNote() {
                         {/* TextArea 3  */}
                         <div>
                             <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                                 name="" id="" cols="30" rows="10" className='inputShadow
                                   mb-4 px-2 py-2 w-full rounded-lg text-black placeholder:text-black outline-none'
                                 placeholder='Description'>
@@ -47,6 +123,7 @@ function UpdateNote() {
                         {/* Button  */}
                         <div className=' flex justify-center mb-3'>
                             <button
+                            onClick={updateNote}
                                 className=' bg-[#000000] w-full text-white font-bold  px-2 
                                 py-2.5 rounded-md'>
                                 Update Note

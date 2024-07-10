@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-    background-image: linear-gradient(to top, rgb(246, 224, 190), rgb(158, 158, 158));
+    background-image: linear-gradient(to top,#F96167, #F9E795 );
     background-repeat: no-repeat;
     background-attachment: fixed;
 }

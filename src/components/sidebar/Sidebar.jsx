@@ -10,7 +10,7 @@ function SideBar() {
   };
 
   return (
-    <div className="  bg-gradient-to-t from-gray-500 to-[#F6E0BE] h-screen border-r ">
+    <div className="  bg-gradient-to-t from-{#F9E795} to-[#F96167] h-screen border-r ">
       {/* Top Image  */}
       <div className="flex justify-center">
         <img className=" w-52 mt-10" src="profile.png" alt="" />

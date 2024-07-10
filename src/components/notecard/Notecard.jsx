@@ -13,7 +13,7 @@ function NotesCard() {
   }, []);
   return (
     <div>
-      <section className=" body-font">
+      <section className=" body-font ">
         <div className="container px-5 py-10 mx-auto">
           {/* Top Heading  */}
           <h2 className=" text-center font-bold underline text-3xl mb-8">
@@ -37,7 +37,7 @@ function NotesCard() {
                   allNotes.map((item, index) => {
                     const { title, description, tag, _id } = item;
                     return (
-                      <div className="mb-3">
+                      <div className="flex border-cyan-950 py-4 px-4">
                         <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden bg-[#f9f9f964]">
                           <div className="p-6">
                             {/* title  */}
