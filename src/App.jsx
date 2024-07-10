@@ -29,7 +29,7 @@ function App() {
               <Addnote />
             </ProtectedRoute>
           } />
-          <Route path="/updatenote" element={
+          <Route path="/notes/edit/:id" element={
 
             <ProtectedRoute>
               <Updatenote />

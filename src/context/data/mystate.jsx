@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import MyContext from './myContext'
+import myContext from './myContext'
 import toast from 'react-hot-toast';
 
 
 function MyState(props) {
-  //* Loading state
+
   const [loading, setLoading] = useState(false);
 
   //* get Notes
@@ -87,12 +87,12 @@ function MyState(props) {
   }
 
   return (
-    <MyContext.Provider value={{ allNotes, getAllNotes, loading, 
+    <myContext.Provider value={{ allNotes, getAllNotes, loading, 
       title, setTitle, description, 
       setDescription, tag, setTag,
       addNote , deleteNote}}>
       {props.children}
-    </MyContext.Provider>
+    </myContext.Provider>
   )
 }
 
